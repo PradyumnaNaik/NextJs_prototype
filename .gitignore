@@ -1,0 +1,105 @@
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+/.nyc_output
+
+# Production
+/build
+/.next/
+/out/
+/dist/
+
+# Environment variables (NEVER commit these!)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Editor & IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+.DS_Store
+.AppleDouble
+.LSOverride
+*.cer
+*.csr
+*.jks
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Temp files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.~*
+
+# OS & System
+Thumbs.db
+ehthumbs.db
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Desktop.ini
+
+# IDEs
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/*
+!.idea/.gitkeep
+*.code-workspace
+
+# Package managers
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Misc development
+.turbo/
+.env.test
+.cache/
+.eslintcache
+.stylelintcache
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Deployment
+.vercel
+.netlify
+
+# Testing
+.coverage
+.jest-cache
+/.jest
+
+# Performance
+.performance
+*.prof
