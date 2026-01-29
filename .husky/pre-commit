@@ -1,0 +1,3 @@
+# Pre-commit checks disabled for Phase 1
+# Uncomment when ready to enable:
+# npx lint-staged

@@ -1,0 +1,132 @@
+name: Governance Compliance
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ═══════════════════════════════════════════════════════════════
+  # JOB 1: Code Quality (TypeScript + ESLint + Stylelint)
+  # ═══════════════════════════════════════════════════════════════
+  quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      
+      - name: TypeScript
+        run: npx tsc --noEmit
+      
+      - name: ESLint
+        run: npx eslint . --config config/.eslintrc.js --max-warnings 0
+      
+      - name: Stylelint
+        run: npx stylelint "**/*.css" --config config/.stylelintrc.js
+
+  # ═══════════════════════════════════════════════════════════════
+  # JOB 2: Tests (50% coverage Phase 1)
+  # ═══════════════════════════════════════════════════════════════
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm test -- --coverage
+        name: Run Tests (50% coverage threshold)
+
+  # ═══════════════════════════════════════════════════════════════
+  # JOB 3: Next.js Build (catches RSC/SSR issues)
+  # ═══════════════════════════════════════════════════════════════
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: [quality]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+        name: Production Build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+
+  # ═══════════════════════════════════════════════════════════════
+  # JOB 4: Next.js Specific Checks
+  # ═══════════════════════════════════════════════════════════════
+  nextjs-checks:
+    name: Next.js Rules
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Server Component Violations
+        run: |
+          echo "Scanning for Server Component violations..."
+          violations=0
+          
+          for file in $(find src -name "*.tsx" | grep -v "\.test\." | grep -v "\.spec\."); do
+            if [ -f "$file" ]; then
+              # Skip if file has 'use client'
+              if grep -q "^'use client'" "$file" || grep -q '^"use client"' "$file"; then
+                continue
+              fi
+              
+              # Check for client-only hooks/APIs
+              if grep -qE "(useState|useEffect|useRef|useCallback|useMemo|useReducer|onClick|onChange|onSubmit)" "$file"; then
+                echo "❌ $file uses client APIs without 'use client'"
+                violations=$((violations + 1))
+              fi
+            fi
+          done
+          
+          if [ $violations -gt 0 ]; then
+            echo "Found $violations violation(s)"
+            exit 1
+          fi
+          echo "✅ Server/Client boundaries correct"
+      
+      - name: Error Boundary Check
+        run: |
+          echo "Checking error.tsx files..."
+          violations=0
+          
+          for file in $(find src -name "error.tsx" 2>/dev/null); do
+            if ! grep -q "^'use client'" "$file" && ! grep -q '^"use client"' "$file"; then
+              echo "❌ $file must have 'use client'"
+              violations=$((violations + 1))
+            fi
+          done
+          
+          if [ $violations -gt 0 ]; then
+            exit 1
+          fi
+          echo "✅ All error.tsx files correct"
+
+  # ═══════════════════════════════════════════════════════════════
+  # FINAL: All Jobs Must Pass
+  # ═══════════════════════════════════════════════════════════════
+  governance-complete:
+    name: ✅ Ready to Merge
+    runs-on: ubuntu-latest
+    needs: [quality, tests, build, nextjs-checks]
+    steps:
+      - run: echo "All governance checks passed!"

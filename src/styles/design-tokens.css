@@ -1,0 +1,225 @@
+/**
+ * Design Tokens
+ * 
+ * This file defines all design tokens as CSS custom properties.
+ * Use these variables instead of hardcoded values.
+ * 
+ * Usage: var(--color-primary), var(--spacing-md), etc.
+ * 
+ * Phase 1: Colors enforced
+ * Phase 2: + Spacing enforced
+ * Phase 3: + Typography enforced
+ */
+
+:root {
+  /* ═══════════════════════════════════════════════════════════════
+     COLORS - Phase 1 (Enforced)
+     Replace with your brand colors
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* Primary Brand */
+  --color-primary: #0066cc;
+  --color-primary-light: #3399ff;
+  --color-primary-dark: #004499;
+
+  /* Secondary Brand */
+  --color-secondary: #6c757d;
+  --color-secondary-light: #adb5bd;
+  --color-secondary-dark: #495057;
+
+  /* Accent */
+  --color-accent: #ff6b35;
+  --color-accent-light: #ff9f7a;
+  --color-accent-dark: #cc4400;
+
+  /* Semantic - Status */
+  --color-success: #28a745;
+  --color-success-light: #71d88a;
+  --color-success-dark: #1e7e34;
+
+  --color-warning: #ffc107;
+  --color-warning-light: #ffda6a;
+  --color-warning-dark: #cc9a06;
+
+  --color-error: #dc3545;
+  --color-error-light: #f1aeb5;
+  --color-error-dark: #a71d2a;
+
+  --color-info: #17a2b8;
+  --color-info-light: #6edff6;
+  --color-info-dark: #117a8b;
+
+  /* Neutrals - Backgrounds */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8f9fa;
+  --color-bg-tertiary: #e9ecef;
+  --color-bg-inverse: #212529;
+
+  /* Neutrals - Text */
+  --color-text-primary: #212529;
+  --color-text-secondary: #6c757d;
+  --color-text-muted: #adb5bd;
+  --color-text-inverse: #ffffff;
+  --color-text-link: var(--color-primary);
+  --color-text-link-hover: var(--color-primary-dark);
+
+  /* Neutrals - Borders */
+  --color-border-default: #dee2e6;
+  --color-border-light: #e9ecef;
+  --color-border-dark: #adb5bd;
+  --color-border-focus: var(--color-primary);
+
+  /* Overlays */
+  --color-overlay-light: rgba(255, 255, 255, 0.9);
+  --color-overlay-dark: rgba(0, 0, 0, 0.5);
+
+  /* ═══════════════════════════════════════════════════════════════
+     SPACING - Phase 2 (Currently not enforced)
+     Based on 4px grid
+     ═══════════════════════════════════════════════════════════════ */
+
+  --spacing-0: 0;
+  --spacing-1: 0.25rem;   /* 4px */
+  --spacing-2: 0.5rem;    /* 8px */
+  --spacing-3: 0.75rem;   /* 12px */
+  --spacing-4: 1rem;      /* 16px */
+  --spacing-5: 1.25rem;   /* 20px */
+  --spacing-6: 1.5rem;    /* 24px */
+  --spacing-8: 2rem;      /* 32px */
+  --spacing-10: 2.5rem;   /* 40px */
+  --spacing-12: 3rem;     /* 48px */
+  --spacing-16: 4rem;     /* 64px */
+  --spacing-20: 5rem;     /* 80px */
+  --spacing-24: 6rem;     /* 96px */
+
+  /* Semantic Spacing */
+  --spacing-xs: var(--spacing-1);
+  --spacing-sm: var(--spacing-2);
+  --spacing-md: var(--spacing-4);
+  --spacing-lg: var(--spacing-6);
+  --spacing-xl: var(--spacing-8);
+  --spacing-2xl: var(--spacing-12);
+
+  /* ═══════════════════════════════════════════════════════════════
+     TYPOGRAPHY - Phase 3 (Currently not enforced)
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* Font Families */
+  --font-family-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family-serif: Georgia, 'Times New Roman', Times, serif;
+  --font-family-mono: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+
+  /* Font Sizes */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+  --font-size-5xl: 3rem;      /* 48px */
+
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Line Heights */
+  --line-height-none: 1;
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+
+  /* Letter Spacing */
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+
+  /* ═══════════════════════════════════════════════════════════════
+     BORDERS & RADIUS
+     ═══════════════════════════════════════════════════════════════ */
+
+  --radius-none: 0;
+  --radius-sm: 0.125rem;   /* 2px */
+  --radius-md: 0.25rem;    /* 4px */
+  --radius-lg: 0.5rem;     /* 8px */
+  --radius-xl: 0.75rem;    /* 12px */
+  --radius-2xl: 1rem;      /* 16px */
+  --radius-full: 9999px;
+
+  /* ═══════════════════════════════════════════════════════════════
+     SHADOWS
+     ═══════════════════════════════════════════════════════════════ */
+
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+
+  /* Focus Ring */
+  --shadow-focus: 0 0 0 3px rgba(0, 102, 204, 0.4);
+
+  /* ═══════════════════════════════════════════════════════════════
+     Z-INDEX SCALE
+     ═══════════════════════════════════════════════════════════════ */
+
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 1080;
+
+  /* ═══════════════════════════════════════════════════════════════
+     TRANSITIONS
+     ═══════════════════════════════════════════════════════════════ */
+
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 350ms ease;
+
+  /* ═══════════════════════════════════════════════════════════════
+     BREAKPOINTS (for reference - use in media queries)
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* 
+   * --breakpoint-sm: 640px;
+   * --breakpoint-md: 768px;
+   * --breakpoint-lg: 1024px;
+   * --breakpoint-xl: 1280px;
+   * --breakpoint-2xl: 1536px;
+   */
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DARK MODE (optional - uncomment to enable)
+   ═══════════════════════════════════════════════════════════════ */
+
+/*
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg-primary: #121212;
+    --color-bg-secondary: #1e1e1e;
+    --color-bg-tertiary: #2d2d2d;
+    --color-bg-inverse: #ffffff;
+
+    --color-text-primary: #e4e4e4;
+    --color-text-secondary: #a0a0a0;
+    --color-text-muted: #6b6b6b;
+    --color-text-inverse: #121212;
+
+    --color-border-default: #3d3d3d;
+    --color-border-light: #2d2d2d;
+    --color-border-dark: #4d4d4d;
+  }
+}
+*/
